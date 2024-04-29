@@ -1,0 +1,71 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Use Maven to build the code
+                echo "Building the code using Maven"
+            }
+        }
+        stage('Unit and Integration Tests') {
+            steps {
+                // Use JUnit for unit tests and Selenium for integration tests
+                echo "Running unit tests using JUnit"
+                echo "Running integration tests using Selenium"
+            }
+            post {
+                success {
+                    // Send notification email on success
+                    emailext attachLog: true, to: 'uviniwijesinghe@gmail.com', subject: "SUCCESS - Unit and Integration Tests", body: "The Unit and Integration Tests has completed successfully."
+                }
+                failure {
+                    // Send notification email on failure
+                    emailext attachLog: true, to: 'uviniwijesinghe@gmail.com', subject: "FAILED - Unit and Integration Tests", body: "The Unit and Integration Tests has failed. Please check the logs for details."
+                }
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                // Use SonarQube for code analysis
+                echo "Analyzing the code using SonarQube"
+            }
+        }
+        stage('Security Scan') {
+            steps {
+                // Use OWASP ZAP for security scanning
+                echo "Performing security scan using OWASP ZAP"
+            }
+            post {
+                success {
+                    // Send notification email on success
+                    emailext attachLog: true, to: 'uviniwijesinghe@gmail.com', subject: "SUCCESS - Security Scan", body: "The Security Scan has completed successfully."
+                }
+                failure {
+                    // Send notification email on failure
+                    emailext attachLog: true, to: 'uviniwijesinghe@gmail.com', subject: "FAILED - Security Scan", body: "The Security Scan has failed. Please check the logs for details."
+                }
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                // Deploy to AWS EC2 instance
+                echo "Deploying the application to staging server in AWS EC2 instance"
+            }
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                // Run integration tests on staging environment
+                echo "Running integration tests on staging environment"
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                // Deploy to AWS EC2 instance
+                echo "Deploying the application to production server in AWS EC2 instance"
+            }
+        }
+    }
+    
+    
+}
