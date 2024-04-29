@@ -39,11 +39,11 @@ pipeline {
             post {
                 success {
                     // Send notification email on success
-                    emailext attachLog: true, to: 'uviniwijesinghe@gmail.com', subject: "SUCCESS - Security Scan", body: "The Security Scan has completed successfully."
+                    emailext attachLog: true, to: 'uviniwijesinghe@gmail.com', subject: "SUCCESS! - Security Scan", body: "The Security Scan has completed successfully."
                 }
                 failure {
                     // Send notification email on failure
-                    emailext attachLog: true, to: 'uviniwijesinghe@gmail.com', subject: "FAILED - Security Scan", body: "The Security Scan has failed. Please check the logs for details."
+                    emailext attachLog: true, to: 'uviniwijesinghe@gmail.com', subject: "FAILED! - Security Scan", body: "The Security Scan has failed. Please check the logs for details."
                 }
             }
         }
